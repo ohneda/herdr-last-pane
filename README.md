@@ -14,9 +14,13 @@ A [Herdr](https://herdr.dev) mod: go back to the pane you were just in, like tmu
 - It draws nothing. It lives in an empty floating block of your layout, so it keeps running
   while you work.
 
-The Herdr desktop app has no last-pane command of its own (`herdr-app commands` lists
-`pane.focus`, `pane.go`, `tab.prev` and `space.prev`, none of which go back to where you were).
-Herdr TUI has a `last_pane` key action; this brings the same idea to the desktop app.
+## A stopgap until Herdr has it
+
+Herdr TUI already has this: a `last_pane` key action. The desktop app doesn't yet
+(`herdr-app commands` lists `pane.focus`, `pane.go`, `tab.prev` and `space.prev`, none of which
+go back to where you were). It will probably get one of its own some day; this mod fills the gap
+until then. When it does, remove the mod, its floating block and its key, and bind Herdr's own
+command instead.
 
 ## How it differs from tmux
 
