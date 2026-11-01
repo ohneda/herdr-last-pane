@@ -4,9 +4,9 @@ A [Herdr](https://herdr.dev) mod: go back to the pane you were just in, like tmu
 
 ![Last pane](preview.png)
 
-- `ctrl-t ctrl-t` focuses the pane you were in before this one. Press it again to come back:
-  it flips between the last two panes. That's this mod's default; tmux's is `prefix ;`, so
-  pick your own (below).
+- Prefix, then `ctrl-t` focuses the pane you were in before this one. Press it again to come
+  back: it flips between the last two panes. With the repo's `ctrl-t` prefix, that's
+  `ctrl-t ctrl-t`. tmux's own key for `last-pane` is prefix, then `;`; pick your own (below).
 - It remembers one pane per space. Going back stays in the space you're looking at, and
   switches tabs in it when the pane you were in is in another tab.
 - Any way of moving counts: clicking a pane, a key bound to `pane.go`, showing another tab,
@@ -75,11 +75,15 @@ the mod if the name is taken), or by hand:
    { "global": { "ctrl-t ctrl-t": "last-pane.go" } }
    ```
 
+   The binding is prefix, then `ctrl-t`. Herdr has no prefix setting: a prefix is just the
+   first key of two-key sequences in `keys.json`, written out in each one. This file uses
+   `ctrl-t` as the prefix, so it reads `ctrl-t ctrl-t`. With another prefix, write yours in
+   its place: `"ctrl-b ctrl-t": "last-pane.go"`, or tmux's own key, `"ctrl-b ;"`.
+
    Check that nothing else already uses the key. `ctrl-t` is also a key shells and programs
    use (transpose characters, fzf's file search): binding a `ctrl-t …` sequence takes plain
    `ctrl-t` away from them. If you already use `ctrl-t` as a prefix, bind `ctrl-t a` to
-   `send:\u0014` to type a literal one. To use tmux's key with a `ctrl-b` prefix, bind
-   `"ctrl-b ;": "last-pane.go"` instead.
+   `send:\u0014` to type a literal one.
 
 Installing under another folder name means renaming `last-pane` in the layout's `"mod"` and in
 your key (`<name>.go`).

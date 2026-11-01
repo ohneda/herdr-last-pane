@@ -1,7 +1,7 @@
 # Last pane
 
-Go back to the pane you were just in: tmux's `last-pane` for Herdr. One key (`ctrl-t ctrl-t`
-here) focuses the pane you were in before this one, switching tabs within the space when
+Go back to the pane you were just in: tmux's `last-pane` for Herdr. Prefix, then `ctrl-t`
+(`ctrl-t ctrl-t` with a `ctrl-t` prefix) focuses the pane you were in before this one, switching tabs within the space when
 needed, and pressing it again comes back. Nothing is drawn: the mod sits in an empty floating
 block of the layout and watches focus. This is a piece you add to your current layout, not a
 whole window.
@@ -27,7 +27,7 @@ It shows no agents, so agent statuses (working, blocked, done, idle) don't chang
 - **It remembers two panes per space**: the one focused now and the one focused before it. Any
   change of `focused().pane` counts, however it happened: a click, `pane.go`, `pane.focus`,
   showing another tab, `agent.next`, a notification, this mod's own key.
-- **`last-pane.go`** (bound to `ctrl-t ctrl-t` in the repo's `keys.json`) focuses the space's
+- **`last-pane.go`** (bound to prefix, then `ctrl-t`: `ctrl-t ctrl-t` in the repo's `keys.json`) focuses the space's
   previous pane. If it's in another tab of the space, that tab is shown first. The pane you left
   becomes the previous one, so pressing again flips back: it toggles between the last two panes,
   as tmux's does. Three panes A → B → C: the key goes to B, then to C, then to B.
@@ -59,7 +59,9 @@ It shows no agents, so agent statuses (working, blocked, done, idle) don't chang
   { "global": { "ctrl-t ctrl-t": "last-pane.go" } }
   ```
 
-  `last-pane.go` reaches the mod through `nextCommand()` as `"go"`.
+  The first `ctrl-t` is the prefix. Herdr has no prefix setting, only two-key sequences, so
+  the prefix is written out: with `ctrl-b` as the prefix it's `"ctrl-b ctrl-t"`. Use the
+  person's prefix. `last-pane.go` reaches the mod through `nextCommand()` as `"go"`.
 - **State**: `this.history`, `{ [space id]: { current, previous } }` (pane ids), made in `init`.
 - **`track()`** reads `focused()`; with no `space` or no `pane` it returns. When `pane` differs
   from that space's `current`, the old `current` becomes `previous` and `pane` becomes `current`.
