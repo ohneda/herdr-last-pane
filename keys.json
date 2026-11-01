@@ -1,0 +1,5 @@
+{
+  "global": {
+    "ctrl-t ctrl-t": "last-pane.go"
+  }
+}
